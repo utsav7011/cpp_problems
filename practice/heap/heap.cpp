@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include<queue>
 using namespace std;
 
 class Heap
@@ -147,4 +148,8 @@ int main()
   {
     cout << it << " ";
   }
+
+
+  priority_queue<int, greater<int>> minHeap;
+
 }
