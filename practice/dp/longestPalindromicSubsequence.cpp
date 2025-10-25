@@ -7,9 +7,6 @@ using namespace std;
   babaababd
   i = 0;
   j = 4
-
-
-
 )*/
 
 int helper(int i, int j, int n, string str1, string str2, vector<vector<int>> &dp)
