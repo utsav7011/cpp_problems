@@ -38,13 +38,16 @@ class Car {
 };
 
 class SportsCar: public Car {
-  public:
   string brand;
   string model;
   bool isEngineOn;
   int currentSpeed;
   int currentGear = 0;
+  
+  public:
 
+  // to set the Private variables, we can define the gettter and setters.
+  
   SportsCar (string brand, string model) {
     this->brand = brand;
     this->model = model;
@@ -107,5 +110,3 @@ int main () {
   myCar->shiftGear(1);
   myCar->accelerate();
 }
-
-
