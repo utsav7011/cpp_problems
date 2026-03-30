@@ -93,23 +93,6 @@ bool isDanger () {
   return false;
 }
 
-
-class Animal {
-
-};
-
-class Duck: private Animal {
-
-};
-
-class Human: private Animal {
-
-};
-
-class Tiger: private Animal {
-
-};
-
-int main()
-{
+int main() {
+  
 }
