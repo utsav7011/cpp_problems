@@ -1,5 +1,47 @@
+// /*****
+//  * 
+//  * 
+//  * inheritance: is - a relationship
+//  * Composition: Has-a relationship. represented with a close diamond with diamond cleosewd to parent class | represnets tose parent child replations in which the child class cannot exist without the parent class./
+//  * 
+//  * Agregation: represented with a hollow diamond | 
+//  * 
+//  * 
+//  * 
+//  * 
+//  */
+
 #include<iostream>
 using namespace std;
+
+
+// class Car {
+//   private:
+//   string model, brand;
+//   public:
+//   Car (string model, string brand) {
+//     this->model = model;
+//     this-> brand = brand;
+//   }
+// };
+
+// class ManualCar {
+//   Car *car;
+//   ManualCar (string model, string brand) {
+//     car = new Car(model, brand);
+//   } 
+
+//   ~ManualCar () {
+//     delete car;
+//   }
+// };
+
+// class ElectricCar {
+//   Car *car;
+//   ElectricCar (string brand, string model) {
+//     car = new Car(brand, model);
+//   }
+// };
 
 class Car {
   public: 
@@ -75,7 +117,29 @@ class SportsCar: public Car {
   }
 };
 
+
+class A {
+  public:
+  void method1() {
+    cout<<endl<<"methoid 1 called";
+  }
+};
+
+class B {
+  public:
+  A *a;
+  B() {
+    a = new A();
+  }
+  void method2 () {
+    cout<<endl<<"tie is method 2"<<endl;
+  }
+};
+
 int main () {
+  B *b = new B();
+  b-> method2();
+  b->a->method1();
   Car* myCar = new SportsCar("Morris Garages", "WindsorEV");
   myCar->startEngine();
   myCar->shiftGear(1);
