@@ -172,3 +172,17 @@ std::runtimeError:
  * 
  * 
  */
+
+
+ /**
+ * Dependency Inversion principle: 
+ * High level module should not depend on low level module but rather both should depend on abstraction
+ * 
+ */
+
+
+ /**
+  * Principle of Least knowlegdge: 
+  * it says that you should always talk to your immediate friend.
+  * ie.e a class should only talk to the ssociate class and not with the frient class of the friend class, as it increases the coupoling between the classes.
+  */

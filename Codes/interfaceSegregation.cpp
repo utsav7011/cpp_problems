@@ -10,10 +10,15 @@
  * 
  */
 
+/**
+ * Dependency Inversion principle: 
+ * High level module should not depend on low level module but rather both should depend on abstraction
+ * 
+ */
+
+
 #include<iostream>
 using namespace std;
-
-
 
 
 int main () {
