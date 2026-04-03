@@ -186,3 +186,16 @@ std::runtimeError:
   * it says that you should always talk to your immediate friend.
   * ie.e a class should only talk to the ssociate class and not with the frient class of the friend class, as it increases the coupoling between the classes.
   */
+
+
+  /**
+   * Problems using iunheritance: 
+   * code reuse not possible in case there are many sub types for subclasses
+   * to add new feature, a lot of changes were requried.
+   * creaking open close principle.
+   * 
+   * the Solution to thse proble is Strategy design pattern i.e.: Defines a family of algowithm, 
+   * put them into separate classes so that they can be changes at the runtime.
+   * 
+   * 
+   */
