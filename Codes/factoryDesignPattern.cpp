@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 /**
  *
  * Factory Design pattern:
@@ -14,10 +15,6 @@ using namespace std;
  * defines an interface for creating object but allows subclass to decide which class to instantiate
  *  
  * - abstract factory method: provides an interfacre for creating families of related objects without specifying their concrete classes.
- *
- *
- *
- *
  */
 
 // Simple factory:
