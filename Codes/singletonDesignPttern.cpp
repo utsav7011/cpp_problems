@@ -13,17 +13,17 @@ using namespace std;
  * because of new keyword, a space is reserved in heap, then  class A cnstructor is called and if we did not create a constructor a default constructor is cralled.
  * an a pointer is kept inn stack and then we assign the heap memory object to stack pointer.
  * 
+ * Static methods belong to class and not to an instance of class.
+ * 
  * Practical use case oif Singleton:
  * Logging system
  * Database connection
  * Confiuguration manager
  */
 
-class Singleton
-{
+class Singleton {
 private:
-  Singleton()
-  {
+  Singleton() {
     cout << endl
          << "Singleto scontructor called,v new object created" << endl;
   }
@@ -31,8 +31,7 @@ private:
   static mutex mtx;
 
 public:
-  static Singleton *getInstance()
-  {
+  static Singleton *getInstance() {
     if (instance == nullptr)
     {
       lock_guard<mutex> lock(mtx);
