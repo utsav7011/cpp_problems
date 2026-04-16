@@ -22,7 +22,7 @@ using namespace std;
  */
 
 class Singleton {
-private:
+  private:
   Singleton() {
     cout << endl
          << "Singleto scontructor called,v new object created" << endl;
@@ -35,8 +35,7 @@ public:
     if (instance == nullptr)
     {
       lock_guard<mutex> lock(mtx);
-      if (instance == nullptr)
-      {
+      if (instance == nullptr) {
         instance = new Singleton();
       }
     }
