@@ -60,7 +60,6 @@ class Flyable {
   virtual void fly () = 0;
 };
 
-
 class IsFlyabl: public Flyable {
   public:
   void fly () override {
@@ -74,7 +73,6 @@ class NonFlyable: public Flyable {
     cout<<endl<<"is notflyable"<<endl;
   }
 };
-
 
 int main () {
 
