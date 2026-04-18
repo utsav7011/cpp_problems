@@ -11,7 +11,7 @@ class Restaurant {
   static int nextrestaurantId;
   int restaurantId;
   string name;
-  string address;
+  string location;
   vector<MenuItem> menu;
 
   public:
@@ -28,5 +28,16 @@ class Restaurant {
 
   string getName () {
     return this->name;
+  }
+
+  void setName(string name) {
+    this->name = name;
+  } 
+
+  string getLocation () {
+    return this->location;
+  }
+  void setLocation (string location) {
+    this->location = location;
   }
 };
