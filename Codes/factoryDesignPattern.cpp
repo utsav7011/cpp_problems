@@ -53,7 +53,7 @@ public:
 };
 
 class BasicWheatBurger : public Burger
-{
+{ 
 public:
   void prepare() override
   {

@@ -21,27 +21,73 @@ using namespace std;
  * Confiuguration manager
  */
 
+// class Singleton {
+//   private:
+//   Singleton() {
+//     cout << endl
+//          << "Singleto scontructor called,v new object created" << endl;
+//   }
+//   static Singleton *instance;
+//   static mutex mtx;
+
+// public:
+//   static Singleton *getInstance() {
+//     if (instance == nullptr)
+//     {
+//       lock_guard<mutex> lock(mtx);
+//       if (instance == nullptr) {
+//         instance = new Singleton();
+//       }
+//     }
+//     return instance;
+//   }
+// };
+
+
 class Singleton {
   private:
-  Singleton() {
-    cout << endl
-         << "Singleto scontructor called,v new object created" << endl;
+  static Singleton* instance;
+  Singleton () {
+    this->instance = nullptr;
+    cout<<endl<<"Singleton instance is created"<<endl;
   }
-  static Singleton *instance;
-  static mutex mtx;
-
-public:
-  static Singleton *getInstance() {
-    if (instance == nullptr)
-    {
-      lock_guard<mutex> lock(mtx);
-      if (instance == nullptr) {
-        instance = new Singleton();
-      }
+  public:
+  static Singleton* getInstance () {
+    if (instance == nullptr) {
+    instance = new Singleton();
     }
     return instance;
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Singleton *Singleton::instance = nullptr;
 mutex Singleton::mtx;
