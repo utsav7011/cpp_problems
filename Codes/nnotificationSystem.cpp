@@ -149,7 +149,7 @@ public:
   }
 };
 
-class Logger : IObserver
+class Logger : public IObserver
 {
 private:
   NotificationObservable *notificationObservable;
@@ -244,7 +244,7 @@ class NotificationEngine: public IObserver {
 
 class NotificationService {
   private:
-  NotificationObservable* observable;
+  static NotificationObservable* observable;
   static NotificationService* instance;
   vector<INotification*> notifications;
 
@@ -258,10 +258,7 @@ class NotificationService {
 
     return instance;
   }
-  NotificationObservable* getObservable() {
-    if (observable == nullptr) {
-      observable = new NotificationObservable();
-    }
+  static NotificationObservable* getObservable() {
     return observable;
   }
 
@@ -280,4 +277,26 @@ NotificationService* NotificationService::instance = nullptr;
 
 int main()
 {
+  NotificationService* instance = NotificationService::getIUnstance();
+  NotificationObservable* notificationObservable = NotificationService::getObservable();
+  Logger* logger = new Logger(notificationObservable);
+  NotificationEngine* notificationEngine = new NotificationEngine(notificationObservable);
+
+  notificationEngine->addNotificationStrategy(new EmailNotification("newMail.com"));
+  notificationEngine->addNotificationStrategy(new SmsNotification("9988776600"));
+  notificationEngine->addNotificationStrategy(new PopUpNotification());
+  
+  notificationObservable->add(logger);
+  notificationObservable->add(notificationEngine);
+
+  // create notificatione with decorators: 
+  INotification* notification = new SimpleNotification("simple notification");
+  notification = new BoldTextNotification(notification);
+  notification = new TImeSTampNotification(notification);
+  notification = new SignatureDecorator(notification);
+  
+  instance->sendNotification(notification);
+  
+  delete logger;
+  delete notificationEngine;
 }
