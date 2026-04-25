@@ -1,6 +1,7 @@
 #include<vector>
 #include<string>
 #include<iostream>
+#include<algorithm>
 using namespace std;
 
 /***
@@ -12,6 +13,7 @@ using namespace std;
  * 
  */
 
+class ISubscribers;  // forward declaration
 
 class IChannel {
   public:
@@ -57,7 +59,7 @@ class Channel: public IChannel {
     }
   }
 
-  void notify() {
+  void notify() override {
     for (auto it: subscribersList) {
       it->update();
     }
@@ -70,10 +72,34 @@ class Channel: public IChannel {
   }
 
   string getVideo() {
-    return "\n checkout new video" + latestVideo + "\n";
+    return "\n checkout new video " + latestVideo + "\n";
+  }
+};
+
+class Subscriber: public ISubscribers {
+  string name;
+  Channel* channel;
+  public:
+  Subscriber (const string& name,  Channel* channel) {
+    this->name = name;
+    this->channel = channel;
+  } 
+
+  void update() override {
+    cout<<endl<<channel->getVideo();
   }
 };
 
 int main () {
+  Channel* newChannel = new Channel("newChannel");
+  Subscriber* subs1 = new Subscriber("name1",  newChannel);
+  Subscriber* subs2 = new Subscriber("newName", newChannel);
+
+  newChannel->subscribe(subs1);
+  newChannel->subscribe(subs2);
+
+  newChannel->uploadVideo("newVideo");
+
+  newChannel->uploadVideo("newVideo2");
 
 }
