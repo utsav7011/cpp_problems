@@ -13,12 +13,13 @@ using namespace std;
  * S: Single responsibility principle
  * A class hsould have only one principle.
  * A class shoould have only one reason to change.
- *
+ * 
  * O: open close principle
- *
- *
+ * 
  * L: Liskov Substitution princile
+ * 
  * I: Interface segregation principle
+ * 
  * D: Dependency Inversion principle
  *
  *
@@ -33,7 +34,6 @@ private:
 
 public:
   ShoppingCart() {}
-
   void addProducts(Product *p)
   {
     products.push_back(p);
@@ -67,7 +67,7 @@ public:
   }
 
   void saveToDB()
-  {
+  {  
     cout << endl
          << "Save teh data to DB" << endl
          << "::::";
@@ -151,6 +151,7 @@ public:
   }
 };
 
-int main()
-{
+int main() {
+
+  
 }

@@ -2,7 +2,6 @@
  * 
  * 
  * Open Close Principle: A class should eb open for extension but close for modification;
- * 
  * to integrate the new feature, old code should not be touched
  * 
  * 

@@ -1,3 +1,28 @@
+/***
+ * 
+ * 
+ * Object Oriented Programming:
+ * real world modelling
+ * 
+ * we need to solve the complex problems:
+ * -> characteristics:
+ * -> behaviour:
+ * 
+ * car:
+ * brand, make, model, wheels
+ * behavioour: start, stop, brake, accelerate
+ * 
+ * Car: Brand, model, isEngineOn
+ * behaviour: star, stop, gearShift()
+ * start, gearShift, accelerate
+ * make fgetters and setters for all the variables
+ * make all the variables as private and also teh methods as public
+ * 
+ * 
+ * 
+ */
+
+
 // /*****
 //  * 
 //  * 
