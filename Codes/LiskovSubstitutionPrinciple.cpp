@@ -1,6 +1,6 @@
 /**
  *
- * subclasses should be substitutable for threit base classes.
+ * subclasses should be substitutable in place of base classes.
  *
  * A base class
  * B sub-class
@@ -20,18 +20,30 @@
  *
  */
 
+
+
+ /**
+  * Broad clkass: is a base class
+  * narrow class is a child class
+  * 
+  * Signature rule: when we override the method in c++, the overrridden method will always take either the base class type of the data or the child class 
+  * i.e. the argument in the child class overriden method muyst be either the child vclass tpye or atleast the broader class type of the child class.
+  *  
+  * property rule: 
+  * 
+  * method rule:
+  * 
+  */
+
 #include <iostream>
 using namespace std;
-class NonWithdrawableAccount
-{
+class NonWithdrawableAccount {
   virtual void deposit(double amount) = 0;
 };
-class WithdrawableAccount
-{
+class WithdrawableAccount {
   virtual void withdraw(double amount) = 0;
 };
-class FixedDeposit : public NonWithdrawableAccount
-{
+class FixedDeposit : public NonWithdrawableAccount {
 private:
   double balance;
 
@@ -47,8 +59,7 @@ public:
          << "bhalance is :::::" << balance;
   }
 };
-class SavingsAccount : public WithdrawableAccount
-{
+class SavingsAccount : public WithdrawableAccount {
 private:
   double balance;
 
@@ -77,8 +88,7 @@ public:
     }
   }
 };
-class CurrentAccount : public WithdrawableAccount
-{
+class CurrentAccount : public WithdrawableAccount {
 private:
   double balance;
 
@@ -138,6 +148,19 @@ class Client {
     p->print("hello");
   }
 };
+
+
+
+/***
+ * 
+ * 
+ * method argumetn rule:
+ * Account: balance:
+ *  
+ * 
+ */
+
+
 
 // Return type rule: 
 /**
