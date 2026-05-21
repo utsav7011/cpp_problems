@@ -11,7 +11,7 @@ using namespace std;
  * We havce 3 types of factory:
  * - Simple factory: a factory class that decides which concrete class to instantiate;
  *
- * - factory method: we introduce a layer of abstraction at the facvtory level as well apart from introducing the abstraction at the object level. Now we can have differnet types of factories as well apart form having the differnet categories of same entity
+ * - factory method: we introduce a layer of abstraction at the factory level as well apart from introducing the abstraction at the object level. Now we can have differnet types of factories as well apart form having the differnet categories of same entity
  * defines an interface for creating object but allows subclass to decide which class to instantiate
  *  
  * - abstract factory method: provides an interfacre for creating families of related objects without specifying their concrete classes.
