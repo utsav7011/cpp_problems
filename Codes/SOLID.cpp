@@ -43,7 +43,7 @@ public:
   {
     return products;
   }
-
+ 
   double calculateTotal()
   {
     double total = 0;
