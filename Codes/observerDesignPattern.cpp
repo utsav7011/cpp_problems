@@ -1,105 +1,62 @@
-#include<vector>
-#include<string>
 #include<iostream>
 #include<algorithm>
+#include<vector>
 using namespace std;
 
-/***
- * 
- * Observer design pattern:
- * 2objects,
- * objects need to know when it changed and /. or what changed in the object.
- * whenever the object changes, it tells other objects about the change,
- * 
- */
-
-class ISubscribers;  // forward declaration
-
-class IChannel {
-  public:
-  virtual void subscribe(ISubscribers* subscriber) = 0;
-  virtual void unSubscribe(ISubscribers* subscriber) = 0;
-  virtual void notify () = 0;
-  virtual ~IChannel () {}
-};
-
-class ISubscribers{
+class IObserver {
   public:
   virtual void update() = 0;
-  virtual ~ISubscribers() {}
 };
 
-
-class Channel: public IChannel {
-  vector<ISubscribers*> subscribersList;
-  string name;
-  string latestVideo;
+class IObservable {
   public:
-  Channel(const string& name) {
-    this->name = name;
+  vector<IObserver*> list;
+  virtual void notify() = 0;
+};
+
+class ConcreteObservable: public IObservable {
+  public:
+  void add(IObserver* newObserver) {
+    list.push_back(newObserver);
   }
 
-  void subscribe(ISubscribers* newSubscriber)  override {
-    if (find(subscribersList.begin(), subscribersList.end(), newSubscriber) == subscribersList.end()) {
-      subscribersList.push_back(newSubscriber);
-    } else {
-      cout<<endl<<"Subscriber already presnet"<<endl;
+  void removeObserver(IObserver* observerToRemove) {
+    auto it = find(list.begin(), list.end(), observerToRemove);
+    if (it == list.end()) {
+      cout<<endl<<"Observer not found::::"<<endl;
       return;
     }
+    list.erase(it);
+    cout<<endl<<"Removed the observer"<<endl;
+    return;
   }
 
-  void unSubscribe(ISubscribers* subscriber) override{
-    if (find(subscribersList.begin(), subscribersList.end(), subscriber) == subscribersList.end()) {
-      cout<<endl<<"Subscriber details not presnet."<<endl;
-    } else {
-      auto it = find(subscribersList.begin(), subscribersList.end(), subscriber);
-      if (it != subscribersList.end()) {
-        subscribersList.erase(it);
-      }
+  string getLatestValue() {
+    return "latest value";
+  }
+  void notify() override{
+    for (auto observer:list) {
+      observer->update();
     }
-  }
-
-  void notify() override {
-    for (auto it: subscribersList) {
-      it->update();
-    }
-  }
-
-  void uploadVideo(const string& title ) {
-    latestVideo = title;
-    cout<<endl<<"Vidoe uploaded |||| Notifiy subscribers"<<endl;
-    notify(); 
-  }
-
-  string getVideo() {
-    return "\n checkout new video " + latestVideo + "\n";
   }
 };
 
-class Subscriber: public ISubscribers {
-  string name;
-  Channel* channel;
+class ConcreteObserver: public IObserver {
+  ConcreteObservable* conObservable;
   public:
-  Subscriber (const string& name,  Channel* channel) {
-    this->name = name;
-    this->channel = channel;
-  } 
-
-  void update() override {
-    cout<<endl<<channel->getVideo();
+  ConcreteObserver(ConcreteObservable* observable) : conObservable(observable) {}
+  
+  void update() override{
+    cout<<endl<<conObservable->getLatestValue();
   }
 };
 
 int main () {
-  Channel* newChannel = new Channel("newChannel");
-  Subscriber* subs1 = new Subscriber("name1",  newChannel);
-  Subscriber* subs2 = new Subscriber("newName", newChannel);
+  ConcreteObservable* observable = new ConcreteObservable();
+  ConcreteObserver* observer1 = new ConcreteObserver(observable);
+  ConcreteObserver* observer2 = new ConcreteObserver(observable);
+  observable->add(observer1);
+  observable->add(observer2);
 
-  newChannel->subscribe(subs1);
-  newChannel->subscribe(subs2);
-
-  newChannel->uploadVideo("newVideo");
-
-  newChannel->uploadVideo("newVideo2");
-
+  observable->notify();
 }
