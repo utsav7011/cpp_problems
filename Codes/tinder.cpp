@@ -528,7 +528,7 @@ int main () {
   Tinder* tinder = Tinder::getInstance();
 
   tinder->registerUser("u1", "Utsav", 27, FEMALE, 12.9352, 77.6146, 22, 30, 10.0);
-  tinder->registerUser("u2", "Ananya", 26, MALE, 12.9698, 77.7500, 22, 32, 15.0);
+  tinder->registerUser("u2", "Kanya", 26, MALE, 12.9698, 77.7500, 22, 32, 15.0);
   tinder->registerUser("u3", "Rahul", 29, MALE, 19.0760, 72.8777, 25, 35, 10.0);
 
   tinder->addInterest("u1", "Hiking", "Weekend trails");
