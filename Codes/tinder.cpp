@@ -538,6 +538,7 @@ int main () {
 
   tinder->displayProfile("u1");
   tinder->displayProfile("u2");
+  
 
   cout<<endl<<"----- profiles near u1 -----"<<endl;
   for (auto profile: tinder->getNearbyProfiles("u1")) {
