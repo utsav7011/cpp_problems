@@ -12,17 +12,23 @@ class HTTPRequest {
   string body;
   int timeout;
 
-  HTTPRequest() : timeout(30), method("GET") {}
+  HTTPRequest() : URL("https://localhost"), method("GET"), body(""), timeout(30) {}
 
 public:
   friend class HTTPRequestBuilder;
 
-  HTTPRequest(string url, string method = "GET",
+  HTTPRequest(string url = "https://localhost",
+              string method = "GET",
               map<string, string> headers = {},
               map<string, string> query = {},
               string body = "",
               int timeout = 30)
-      : URL(url), method(method), header(headers), queryParams(query), body(body), timeout(timeout) {}
+      : URL(url.empty() ? "https://localhost" : url),
+        method(method.empty() ? "GET" : method),
+        header(headers),
+        queryParams(query),
+        body(body),
+        timeout(timeout <= 0 ? 30 : timeout) {}
 
   // method to execute the HTTP Request;
   void execute() {
@@ -55,7 +61,7 @@ class HTTPRequestBuilder {
   int timeout;
 
 public:
-  HTTPRequestBuilder() : method("GET"), timeout(30) {}
+  HTTPRequestBuilder() : URL("https://localhost"), method("GET"), body(""), timeout(30) {}
 
   HTTPRequestBuilder &withURL(const string &url) {
     URL = url;
@@ -88,7 +94,35 @@ public:
   }
 
   HTTPRequest build() {
+    if (URL.empty()) URL = "https://localhost";
+    if (method.empty()) method = "GET";
+    if (timeout <= 0) timeout = 30;
+
     return HTTPRequest(URL, method, header, queryParams, body, timeout);
+  }
+};
+
+class HTTPBuilderDirector {
+public:
+  static HTTPRequest buildDefaultRequest() {
+    return HTTPRequestBuilder()
+        .withURL("https://localhost")
+        .withMethod("GET")
+        .withHeader("Accept", "application/json")
+        .withTimeout(30)
+        .build();
+  }
+
+  static HTTPRequest buildRequestWithDefaults(const string &url = "https://localhost",
+                                             const string &method = "GET",
+                                             const string &body = "",
+                                             int timeout = 30) {
+    return HTTPRequestBuilder()
+        .withURL(url)
+        .withMethod(method)
+        .withBody(body)
+        .withTimeout(timeout)
+        .build();
   }
 };
 
@@ -103,7 +137,20 @@ int main() {
                         .withTimeout(60)
                         .build();
 
+  HTTPRequest defaultReq = HTTPRequestBuilder()
+                              .withHeader("Accept", "application/json")
+                              .build();
+
+  HTTPRequest directorReq = HTTPBuilderDirector::buildDefaultRequest();
+
+  cout << "--- Full Request ---" << endl;
   req.execute();
+
+  cout << "\n--- Default Request ---" << endl;
+  defaultReq.execute();
+
+  cout << "\n--- Director Default Request ---" << endl;
+  directorReq.execute();
 
   return 0;
 }
