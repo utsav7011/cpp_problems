@@ -53,6 +53,14 @@ class User: public Observer {
     return it->second;
   }
 
+  // Returns true if this user currently owes any other user (negative balance)
+  bool owesAnyone() const {
+    for (const auto &p : balances) {
+      if (p.second < -1e-9) return true;
+    }
+    return false;
+  }
+
   // Print all peer balances
   void printBalances() const {
     cout << "Balances for " << name << " (" << id << "):\n";
@@ -258,7 +266,12 @@ class Group {
   void removeUser(const string &userId) {
     for (size_t i = 0; i < members.size(); ++i) {
       if (members[i]->getId() == userId) {
-        string name = members[i]->getName();
+        User *u = members[i];
+        string name = u->getName();
+        if (u->owesAnyone()) {
+          notifyUsers("Cannot remove user " + name + " from group " + groupName + ": outstanding payments exist");
+          return;
+        }
         members.erase(members.begin() + i);
         notifyUsers("User " + name + " removed from group " + groupName);
         return;
