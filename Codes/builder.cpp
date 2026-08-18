@@ -14,7 +14,7 @@ class HTTPRequest {
 
   HTTPRequest() : URL("https://localhost"), method("GET"), body(""), timeout(30) {}
 
-public:
+  public:
   friend class HTTPRequestBuilder;
 
   HTTPRequest(string url = "https://localhost",
